@@ -1,4 +1,4 @@
-package Tudo.Sistema_Notas;
+package Tudo.Sistema_Notas_Lista_Dupla;
 import java.util.ArrayList;
 
 public class Aluno {
