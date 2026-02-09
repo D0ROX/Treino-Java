@@ -1,7 +1,5 @@
 package Tudo.Sistema_Cadastro_Pet;
 
-import java.util.Scanner;
-
 public class Sistema {
     public static void main(String[] args) {
         

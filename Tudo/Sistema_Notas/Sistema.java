@@ -26,5 +26,6 @@ public class Sistema {
        } else{
         System.out.println("O aluno não atingiu a nota necessária, tera q refazer os testes! ");
        }
+        sc.close();
     }
 }
