@@ -7,6 +7,8 @@ public class SistemaBancario {
         Scanner sc = new Scanner(System.in);
         ContaBancaria contaAtiva = null; 
 
+        GerenciadorDeImposto fiscal = new GerenciadorDeImposto();
+
         while(true){
             try {
                 // ETAPA 1: CRIAÇÃO DA CONTA E CONFIGURAÇÃO (Só acontece uma vez por cliente)
@@ -38,7 +40,7 @@ public class SistemaBancario {
 
                 // ETAPA 2: MENU DE OPERAÇÕES (Fica repetindo aqui)
                 System.out.println("\n--- MENU: " + contaAtiva.getTitular() + " ---");
-                System.out.println("1-Depositar | 2-Sacar | 3-Saldo | 4-Trocar de Cliente | 5-Sair");
+                System.out.println("1-Depositar | 2-Sacar | 3-Saldo | 4-Trocar de Cliente | 5-Listar Tributos | 6-Sair ");
                 int opcao = sc.nextInt();
 
                 switch (opcao) {
@@ -58,9 +60,25 @@ public class SistemaBancario {
                         sc.nextLine(); 
                         break;
                     case 5:
+                        System.out.println("----- RELATÓRIO DE IMPOSTOS -----");
+                        if(contaAtiva instanceof Tributavel){
+                            fiscal.calcular((Tributavel)contaAtiva);
+                            System.out.println("Imposto da conta de " + contaAtiva.getTitular() + " contabilizado.");
+                        } else {
+                            System.out.println("Esta cont não é tributavel! ");
+                        }
+
+                        SeguroDeVida seguro =  new SeguroDeVida();
+                        fiscal.calcular(seguro);
+                        System.out.println("Taxa de Seguro de Vida (R$ 42,00) contabilizada.");
+
+                        System.out.printf("Total acumulado pelo fisco: R$ %.2f%n", fiscal.getTotalImposto());
+                        break;
+                    case 6:
                         System.out.println("Encerrando... Até logo!");
                         sc.close();
                         System.exit(0);
+            
                     default:
                         System.out.println("Opção inválida!");
                 }
